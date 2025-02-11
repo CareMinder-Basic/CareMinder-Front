@@ -3,6 +3,11 @@
   "version": "1.0.0",
   "private": true,
   "license": "ISC",
+  "packageManager": "pnpm@9.15.4",
+  "scripts": {
+    "dev": "turbo re dev",
+    "dev:careflow": "turbo run dev --filter=careflow..."
+  },
   "devDependencies": {
     "eslint": "^8.55.0",
     "prettier": "^3.0.3",

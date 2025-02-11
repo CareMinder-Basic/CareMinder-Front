@@ -1,53 +1,20 @@
 {
-  "name": "@careminder/ui-library",
-  "version": "1.0.0",
-  "main": "dist/index.js",
-  "module": "dist/index.esm.js",
-  "types": "dist/index.d.ts",
-  "exports": {
-    ".": {
-      "import": "./dist/index.esm.js",
-      "require": "./dist/index.js"
-    }
-  },
-  "dependencies": {
-    "react-native": "0.77.0",
-    "react-native-web": "0.19.13"
+  "name": "@careflow/ui",
+  "version": "0.0.1",
+  "private": true,
+  "main": "./index.tsx",
+  "types": "./index.tsx",
+  "scripts": {
+    "lint": "eslint \"**/*.ts*\"",
+    "build": "tsup index.tsx --format esm,cjs --dts --external react"
   },
   "devDependencies": {
-    "@babel/core": "^7.26.7",
-    "@chromatic-com/storybook": "^3.2.4",
-    "@gorhom/bottom-sheet": "^5.0.6",
-    "@react-native-async-storage/async-storage": "^2.1.0",
-    "@react-native-community/datetimepicker": "^8.2.0",
-    "@react-native-community/slider": "^4.5.5",
-    "@storybook/addon-essentials": "^8.5.3",
-    "@storybook/addon-interactions": "^8.5.3",
-    "@storybook/addon-onboarding": "^8.5.3",
-    "@storybook/addon-ondevice-actions": "^8.5.3",
-    "@storybook/addon-ondevice-controls": "^8.5.3",
-    "@storybook/addon-webpack5-compiler-swc": "^2.0.0",
-    "@storybook/blocks": "^8.5.3",
-    "@storybook/builder-webpack5": "8.5.3",
-    "@storybook/react": "^8.5.3",
-    "@storybook/react-native": "^8.5.3",
-    "@storybook/react-webpack5": "^8.5.3",
-    "@storybook/test": "^8.5.3",
-    "@swc/core": "1.10.12",
-    "babel-loader": "^8.4.1",
-    "react-native-gesture-handler": "^2.22.1",
-    "react-native-reanimated": "^3.16.7",
-    "react-native-safe-area-context": "^5.1.0",
-    "react-native-svg": "^15.11.1",
-    "storybook": "8.2.9",
-    "webpack": "5.97.1",
-    "webpack-cli": "6.0.1"
-  },
-  "scripts": {
-    "build": "tsup src/index.ts --dts --format esm,cjs",
-    "test": "jest",
-    "storybook-generate": "sb-rn-get-stories",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "eslint": "^8.0.0",
+    "eslint-config-custom": "*",
+    "react": "^18.0.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.0.0"
   }
 }
