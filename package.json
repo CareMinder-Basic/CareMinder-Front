@@ -6,15 +6,28 @@
   "packageManager": "pnpm@9.15.4",
   "scripts": {
     "dev": "turbo re dev",
-    "dev:careflow": "turbo run dev --filter=careflow..."
+    "dev:careflow": "turbo run dev --filter=careflow...",
+    "dev:@cds": "turbo run storybook --filter=@careminder/cds",
+    "build:@cds": "turbo run build --filter=@careminder/cds"
   },
   "devDependencies": {
     "eslint": "^8.55.0",
     "prettier": "^3.0.3",
     "turbo": "2.4.0",
-    "typescript": "^5.2.0"
+    "typescript": "^5.2.0",
+    "@types/react": "^18.2.55",
+    "@types/react-dom": "^18.2.19",
+    "@types/node": "^20.11.17"
   },
   "dependencies": {
-    "tsup": "8.3.6"
-  }
+    "tsup": "8.3.6",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "@tanstack/react-query": "^5.20.1",
+    "@tanstack/react-query-devtools": "^5.20.1"
+  },
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ]
 }

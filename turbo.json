@@ -6,7 +6,12 @@
       "outputs": ["dist/**"]
     },
     "dev": {
-      "dependsOn": ["^dev"]
+      "dependsOn": ["^dev"],
+      "persistent": true
+    },
+    "storybook": {
+      "dependsOn": ["^storybook"],
+      "persistent": true
     }
   }
 }

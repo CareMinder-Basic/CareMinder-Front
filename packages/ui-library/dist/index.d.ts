@@ -1,9 +1,12 @@
+import * as react_jsx_runtime from 'react/jsx-runtime';
 import React from 'react';
 
 interface ButtonProps {
-    label: string;
+    variant?: "primary" | "secondary";
+    size?: "small" | "medium" | "large";
+    children: React.ReactNode;
     onClick?: () => void;
 }
-declare const Button: React.FC<ButtonProps>;
+declare const Button: ({ variant, size, children, onClick, }: ButtonProps) => react_jsx_runtime.JSX.Element;
 
-export { Button };
+export { Button, type ButtonProps };

@@ -11,9 +11,7 @@ export default {
   },
 } as Meta;
 
-const Template: StoryFn<typeof Button> = (args) => (
-  <Button label={"테스트"} {...args} />
-);
+const Template: StoryFn<typeof Button> = (args) => <Button {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {

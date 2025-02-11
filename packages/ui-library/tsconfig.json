@@ -4,7 +4,13 @@
     "esModuleInterop": true,
     "jsx": "react-jsx",
     "jsxImportSource": "react",
-    "types": ["react", "react-native", "jest", "@testing-library/jest-dom"],
+    "types": [
+      "react",
+      "react-native",
+      "jest",
+      "@testing-library/jest-dom",
+      "@storybook/react"
+    ],
     "outDir": "dist",
     "rootDir": "src",
     "declaration": true,
@@ -18,6 +24,6 @@
       "react-native": ["node_modules/react-native-web"]
     }
   },
-  "include": ["src", "tests"],
+  "include": ["src", "tests", ".storybook/**/*"],
   "exclude": ["node_modules", "dist", "**/*.stories.tsx"]
 }

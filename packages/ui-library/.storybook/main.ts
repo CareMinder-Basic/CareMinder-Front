@@ -1,32 +1,32 @@
-import type { StorybookConfig } from "@storybook/react-webpack5";
-import path from "path";
-import { join, dirname } from "path";
+import type { StorybookConfig } from "@storybook/react-vite";
 
-/**
- * This function is used to resolve the absolute path of a package.
- * It is needed in projects that use Yarn PnP or are set up within a monorepo.
- */
-function getAbsolutePath(value: string): any {
-  return dirname(require.resolve(join(value, "package.json")));
-}
 const config: StorybookConfig = {
   stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
   addons: [
-    getAbsolutePath("@storybook/addon-webpack5-compiler-swc"),
-    getAbsolutePath("@storybook/addon-onboarding"),
-    getAbsolutePath("@storybook/addon-essentials"),
-    getAbsolutePath("@chromatic-com/storybook"),
-    getAbsolutePath("@storybook/addon-interactions"),
+    "@storybook/addon-links",
+    "@storybook/addon-essentials",
+    "@storybook/addon-interactions",
   ],
   framework: {
-    name: getAbsolutePath("@storybook/react-webpack5"),
+    name: "@storybook/react-vite",
     options: {},
   },
-  webpackFinal: async (config) => {
-    if (config.resolve && config.resolve.alias) {
-      config.resolve.alias["@"] = path.resolve(__dirname, "../src");
-    }
-    return config;
+  docs: {
+    autodocs: true,
+  },
+  async viteFinal(config) {
+    return {
+      ...config,
+      resolve: {
+        ...config.resolve,
+        alias: {
+          ...config.resolve?.alias,
+          "react-native$": "react-native-web",
+          "react-native-web": "react-native-web",
+        },
+      },
+    };
   },
 };
+
 export default config;
