@@ -1,0 +1,86 @@
+pipeline {
+    agent any
+
+    environment {
+        DOCKERHUB_CREDENTIALS = credentials('dockerhub-credentials')
+        WAS_HOST = '223.130.146.69'
+        WAS_USER = 'root'
+        IMAGE_NAME = 'cm-basic-frontend'
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'github-credentials', usernameVariable: 'GITHUB_USER', passwordVariable: 'GITHUB_PASS')]) {
+                    sh """
+                        if [ -d "CareMinder-PC" ]; then
+                            rm -rf CareMinder-PC
+                        fi
+                        git clone -b release/staging https://${GITHUB_USER}:${GITHUB_PASS}@github.com/CareMinder-Basic/CareMinder-PC.git
+                        cd CareMinder-PC
+                        pwd  # 현재 경로 출력
+                        ls -al  # 파일 목록 출력
+                    """
+                }
+            }
+        }
+        stage("Load Environment Variables"){
+                steps {
+                    sh """
+                        echo "🔍 현재 Jenkins 작업 디렉토리:"
+                        pwd  # 현재 경로 출력
+                        
+                        if [ ! -d "CareMinder-PC" ]; then
+                        echo "❌ CareMinder-PC 디렉토리가 존재하지 않습니다!"
+                        exit 1
+                        fi
+                        
+                        echo "VITE_SEVER_URL=https://careflow.co.kr/api" > CareMinder-PC/.env
+                        echo "VITE_SW_SEVER_URL=https://careflow.co.kr/ws" >> CareMinder-PC/.env
+                        echo "NODE_ENV=production" >> CareMinder-PC/.env
+                        cat CareMinder-PC/.env
+                    """
+                }
+        }
+        stage('Build Docker Image') {
+            steps {
+                sh """
+                    cd CareMinder-PC
+                    docker build --rm -t ${env.IMAGE_NAME}:latest .
+                    docker image prune -f  # 중간 이미지 정리
+                """
+            }
+        }
+
+        stage('Push Docker Image to Docker Hub') {
+            steps {
+                sh """
+                    echo ${env.DOCKERHUB_CREDENTIALS_PSW} | docker login -u ${env.DOCKERHUB_CREDENTIALS_USR} --password-stdin
+                    docker tag ${env.IMAGE_NAME}:latest ${env.DOCKERHUB_CREDENTIALS_USR}/${env.IMAGE_NAME}:latest
+                    docker push ${env.DOCKERHUB_CREDENTIALS_USR}/${env.IMAGE_NAME}:latest
+                    docker image prune -f  # 사용하지 않는 이미지 정리
+                """
+            }
+        }
+        stage('Deploy to NCP Server') {
+            steps {
+                withCredentials([string(credentialsId: 'server-password', variable: 'WAS_PASS')]) {
+                    sh """
+                        sshpass -p "${WAS_PASS}" ssh -o StrictHostKeyChecking=no ${env.WAS_USER}@${env.WAS_HOST} '
+                            echo ${DOCKERHUB_CREDENTIALS_PSW} | docker login -u ${DOCKERHUB_CREDENTIALS_USR} --password-stdin;
+                            
+                            # 기존 컨테이너를 강제 종료 및 삭제
+                            docker rm -f \$(docker ps -aq --filter name=cm-basic-frontend) || true;
+
+                            # 최신 이미지를 가져오고 새 컨테이너 실행
+                            docker pull ${DOCKERHUB_CREDENTIALS_USR}/cm-basic-frontend:latest;
+                            docker run -d -p 5050:5050 --name cm-basic-frontend --add-host host.docker.internal:host-gateway ${DOCKERHUB_CREDENTIALS_USR}/cm-basic-frontend:latest;
+                            docker image prune -f;
+                        '
+                    """
+                }
+            }
+}
+    }
+    
+}

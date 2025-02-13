@@ -1,0 +1,26 @@
+FROM node:18-alpine AS builder
+
+WORKDIR /app
+
+
+RUN npm install -g pnpm
+
+COPY ../../pnpm-*.yaml ./
+COPY ../../package.json ./
+
+
+COPY . ./packages/ui-library/
+
+RUN pnpm install
+RUN cd packages/ui-library && pnpm build-storybook
+
+RUN pnpm install
+RUN cd packages/ui-library && pnpm build-storybook
+
+FROM nginx:alpine
+
+COPY --from=builder /app/packages/ui-library/storybook-static /usr/share/nginx/html
+
+EXPOSE 6006
+
+CMD ["nginx", "-g", "daemon off;"]

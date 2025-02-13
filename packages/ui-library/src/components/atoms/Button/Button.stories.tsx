@@ -1,6 +1,6 @@
 import React from "react";
 import { Meta, StoryFn } from "@storybook/react";
-import Button from "./Button"; // Adjust path based on your project structure
+import { Button } from "./Button";
 
 export default {
   title: "Components/Button",

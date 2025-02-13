@@ -1,0 +1,120 @@
+pipeline {
+    agent any
+
+    environment {
+        DOCKERHUB_CREDENTIALS = credentials('dockerhub-credentials')
+        WAS_HOST = '223.130.146.69'
+        WAS_USER = 'root'
+        IMAGE_NAME = 'careminder-storybook'
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'github-credentials', usernameVariable: 'GITHUB_USER', passwordVariable: 'GITHUB_PASS')]) {
+                    sh """
+                        if [ -d "CareMinder-PC" ]; then
+                            rm -rf CareMinder-PC
+                        fi
+                        git clone -b main https://${GITHUB_USER}:${GITHUB_PASS}@github.com/CareMinder-Basic/CareMinder-Front.git
+                        cd CareMinder-PC
+                        pwd
+                        ls -al
+                    """
+                }
+            }
+        }
+
+        stage('Check UI Library Changes') {
+            steps {
+                script {
+                    def changes = sh(
+                        script: """
+                            cd CareMinder-PC
+                            git diff --name-only HEAD^ HEAD | grep -E '^packages/ui-library/' || true
+                        """,
+                        returnStdout: true
+                    ).trim()
+                    env.SHOULD_DEPLOY = changes ? 'true' : 'false'
+                }
+            }
+        }
+
+        stage('Build Storybook') {
+            when {
+                expression { env.SHOULD_DEPLOY == 'true' }
+            }
+            steps {
+                sh """
+                    cd CareMinder-Front
+                    cd packages/ui-library
+                    pnpm install
+                    pnpm build-storybook
+                """
+            }
+        }
+
+        stage('Build Docker Image') {
+            when {
+                expression { env.SHOULD_DEPLOY == 'true' }
+            }
+            steps {
+                sh """
+                    cd CareMinder-PC
+                    docker build --rm -t ${env.IMAGE_NAME}:latest -f packages/ui-library/Dockerfile packages/ui-library
+                    docker image prune -f
+                """
+            }
+        }
+
+        stage('Push Docker Image') {
+            when {
+                expression { env.SHOULD_DEPLOY == 'true' }
+            }
+            steps {
+                sh """
+                    echo ${env.DOCKERHUB_CREDENTIALS_PSW} | docker login -u ${env.DOCKERHUB_CREDENTIALS_USR} --password-stdin
+                    docker tag ${env.IMAGE_NAME}:latest ${env.DOCKERHUB_CREDENTIALS_USR}/${env.IMAGE_NAME}:latest
+                    docker push ${env.DOCKERHUB_CREDENTIALS_USR}/${env.IMAGE_NAME}:latest
+                    docker image prune -f
+                """
+            }
+        }
+
+        stage('Deploy to Server') {
+            when {
+                expression { env.SHOULD_DEPLOY == 'true' }
+            }
+            steps {
+                withCredentials([string(credentialsId: 'server-password', variable: 'WAS_PASS')]) {
+                    sh """
+                        sshpass -p "${WAS_PASS}" ssh -o StrictHostKeyChecking=no ${env.WAS_USER}@${env.WAS_HOST} '
+                            echo ${DOCKERHUB_CREDENTIALS_PSW} | docker login -u ${env.DOCKERHUB_CREDENTIALS_USR} --password-stdin;
+                            
+                            # 기존 스토리북 컨테이너 정리
+                            docker rm -f \$(docker ps -aq --filter name=careminder-storybook) || true;
+
+                            # 새 컨테이너 실행
+                            docker pull ${env.DOCKERHUB_CREDENTIALS_USR}/careminder-storybook:latest;
+                            docker run -d -p 6006:6006 --name careminder-storybook ${env.DOCKERHUB_CREDENTIALS_USR}/careminder-storybook:latest;
+                            docker image prune -f;
+                        '
+                    """
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            script {
+                if (env.SHOULD_DEPLOY == 'true') {
+                    echo "Storybook 배포 완료"
+                }
+            }
+        }
+        failure {
+            echo "배포 실패"
+        }
+    }
+}
