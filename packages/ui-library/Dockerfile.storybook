@@ -8,6 +8,8 @@ RUN npm install -g pnpm
 # 모노레포 설정 파일 복사
 COPY package.json pnpm-*.yaml tsconfig.base.json ./
   
+# 전체 packages 디렉토리 복사 (의존성 해결을 위해)
+COPY packages ./packages
 
 
 # ui-library 관련 파일 복사
