@@ -5,11 +5,14 @@ WORKDIR /app
 
 RUN npm install -g pnpm
 
-COPY ../../pnpm-*.yaml ./
-COPY ../../package.json ./
+# 모노레포 설정 파일 복사
+COPY package.json ./
+COPY pnpm-*.yaml ./
+COPY packages/ui-library/package.json ./packages/ui-library/
 
 
-COPY . ./packages/ui-library/
+COPY packages/ui-library ./packages/ui-library
+
 
 RUN pnpm install
 RUN cd packages/ui-library && pnpm build-storybook
