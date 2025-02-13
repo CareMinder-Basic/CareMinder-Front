@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Button } from "@careminder/cds";
+// import { Button } from "@careminder/cds";
 
 export default function WardPage() {
   return (
@@ -12,7 +12,15 @@ export default function WardPage() {
           <div key={id} className="border rounded-lg p-4 shadow-sm">
             <h3 className="font-semibold mb-2">환자 {id}</h3>
             <p className="text-gray-600 mb-4">간단한 환자 정보...</p>
-            <Button>상세 정보</Button>
+            {/* <Button
+              buttontype={"primary"}
+              width={"100px"}
+              height={"30px"}
+              fontSize={"14px"}
+              borderRadius={"8px"}
+            >
+              상세 정보
+            </Button> */}
             <Link
               href={`/patient/${id}`}
               className="text-blue-500 hover:text-blue-600 ml-2"

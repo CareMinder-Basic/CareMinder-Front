@@ -1,12 +1,19 @@
+import { FC, PropsWithChildren } from 'react';
+import { ButtonProps } from '@mui/material';
 import * as react_jsx_runtime from 'react/jsx-runtime';
-import React from 'react';
 
-interface ButtonProps {
-    variant?: "primary" | "secondary";
-    size?: "small" | "medium" | "large";
-    children: React.ReactNode;
-    onClick?: () => void;
-}
-declare const Button: ({ variant, size, children, onClick, }: ButtonProps) => react_jsx_runtime.JSX.Element;
+type CustomButtonProps = {
+    buttontype: "primary" | "primarySpaure" | "primarySpaureWhite" | "gradient" | "primaryWhite" | "primaryBlack" | "primarySpaureLong" | "impactRed" | "primarySecond";
+    icon?: React.ReactNode;
+    width: string | number;
+    height: string | number;
+    fontSize: string | number;
+    borderRadius: string | number;
+    fontWeight?: string | number;
+    lineHeight?: string | number;
+} & ButtonProps;
+declare const CDSButton: FC<CustomButtonProps>;
 
-export { Button, type ButtonProps };
+declare function MuiSetting({ children }: PropsWithChildren): react_jsx_runtime.JSX.Element;
+
+export { CDSButton as Button, type CustomButtonProps, MuiSetting as ThemeProvider };
