@@ -8,14 +8,20 @@ RUN npm install -g pnpm
 # 모노레포 설정 파일 복사
 COPY package.json ./
 COPY pnpm-*.yaml ./
-COPY packages/ui-library/package.json ./packages/ui-library/
+COPY tsconfig.base.json ./ 
+COPY tsconfig.json ./      
+
+
+# ui-library 관련 파일 복사
+COPY packages/ui-library ./packages/ui-library
+COPY packages/ui-library/tsconfig.json ./packages/ui-library/
 
 
 COPY packages/ui-library ./packages/ui-library
 
 
 RUN pnpm install
-RUN cd packages/ui-library && pnpm build-storybook
+RUN cd packages/ui-library && pnpm build-storybook --quiet
 
 RUN pnpm install
 RUN cd packages/ui-library && pnpm build-storybook
