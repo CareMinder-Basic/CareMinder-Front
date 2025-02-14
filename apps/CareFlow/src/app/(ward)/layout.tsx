@@ -1,7 +1,10 @@
+"use client";
+import { ThemeProvider } from "@careminder/cds";
+
 export default function WardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return <>{children}</>;
+  return <ThemeProvider>{children}</ThemeProvider>;
 }
