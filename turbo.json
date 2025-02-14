@@ -12,6 +12,15 @@
     "storybook": {
       "dependsOn": ["^storybook"],
       "persistent": true
+    },
+    "e2e": {
+      "dependsOn": ["^e2e"],
+      "cache": false,
+      "outputs": []
+    },
+    "unit":{
+      "dependsOn": [],
+      "outputs": []
     }
   }
 }
