@@ -1,0 +1,11 @@
+{
+  "name": "@careminder/tailwind-config",
+  "version": "1.0.0",
+  "private": true,
+  "exports": {
+    ".": "./tailwind.config.js"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
