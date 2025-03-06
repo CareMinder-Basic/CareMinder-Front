@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 interface ModalProps {
   children: React.ReactNode;
@@ -24,13 +24,13 @@ export default function Modal({ children, title }: ModalProps) {
   return (
     <div
       className={`fixed inset-0 bg-black/50 z-50 flex items-center justify-center transition-opacity duration-300 ${
-        isOpen ? "opacity-100" : "opacity-0"
+        isOpen ? 'opacity-100' : 'opacity-0'
       }`}
       onClick={closeModal}
     >
       <div
-        className={`bg-white rounded-lg p-6 w-full max-w-lg transition-all duration-300 ${
-          isOpen ? "scale-100 opacity-100" : "scale-95 opacity-0"
+        className={`bg-black rounded-lg p-6 w-full max-w-lg transition-all duration-300 ${
+          isOpen ? 'scale-100 opacity-100' : 'scale-95 opacity-0'
         }`}
         onClick={(e) => e.stopPropagation()}
       >

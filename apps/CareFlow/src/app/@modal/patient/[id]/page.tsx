@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import Modal from "@/components/Modal";
+import Modal from '@/components/modal';
 
 export default function PatientModal({ params }: { params: { id: string } }) {
   return (

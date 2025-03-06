@@ -1,7 +1,9 @@
-export default function StaffLayout({
+import { StaffAuthProvider } from '@/providers';
+
+export default async function StaffLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return <div>{children}</div>;
+  return <StaffAuthProvider>{children}</StaffAuthProvider>;
 }

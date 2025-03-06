@@ -1,7 +1,7 @@
-const baseConfig = require("../../jest.config");
+const baseConfig = require('../../jest.config');
 
 module.exports = {
   ...baseConfig,
-  displayName: "frontend",
-  testMatch: ["**/__tests__/**/*.test.ts?(x)"],
+  displayName: 'frontend',
+  testMatch: ['**/__tests__/**/*.test.ts?(x)'],
 };

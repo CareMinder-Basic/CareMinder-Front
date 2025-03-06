@@ -6,4 +6,4 @@
  * - Button, Input 등 공통 UI 컴포넌트들이 이곳에 위치
  */
 
-export { default as Modal } from "./Modal";
+export { default as Modal } from './modal';

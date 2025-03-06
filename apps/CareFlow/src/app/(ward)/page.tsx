@@ -1,11 +1,16 @@
-import Link from "next/link";
+"use client";
+
+import { useUserStore } from '@/lib';
+import Link from 'next/link';
 // import { Button } from "@careminder/cds";
 
 export default function WardPage() {
+
+  const user = useUserStore((state) => state.user);
+  console.log(user);
   return (
     <div className="p-8">
       <h1 className="text-2xl font-bold mb-6">병동 관리</h1>
-
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {/* 환자 카드 예시 */}
         {[1, 2, 3].map((id) => (
