@@ -3,15 +3,17 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { LoginFormType, loginSchema, useUserStore } from '@/lib';
-import LoginForm from '@/components/login-form';
+// import LoginForm from '@/components/login-form';
 import { useUser } from '@/hooks/useUser';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation';
 import LoadingSpinner from '@/components/loading-spinner';
+import { LoginForm } from '@careminder/cds';
 export default function LoginFormWard() {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm<LoginFormType>({
     resolver: zodResolver(loginSchema),
@@ -20,6 +22,7 @@ export default function LoginFormWard() {
   const router = useRouter();
   const { mutate: login,isPending } = useUser();
   const setUser = useUserStore((state) => state.setUser);
+  const isDisabled = Boolean(watch("loginId")?.trim()) && Boolean(watch("password")?.trim());
 
   const onError = (error: any) => {    
     throw new Error('로그인 실패');
@@ -69,6 +72,7 @@ export default function LoginFormWard() {
       register={register}
       onError={onError}
       errors={errors}
+      isDisabled={isDisabled}
     />
   );
 }

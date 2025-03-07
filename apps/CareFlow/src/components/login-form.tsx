@@ -17,8 +17,6 @@ export default function LoginForm({
   errors?: FieldErrors<LoginFormType>;
   onError: (error: any) => void;
 }) {        
-
-  
     return (
       <form onSubmit={handleSubmit(onSubmit,onError)} className="space-y-4">
         <div>
