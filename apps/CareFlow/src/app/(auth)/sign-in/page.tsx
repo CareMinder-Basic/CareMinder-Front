@@ -3,8 +3,9 @@ import Skeleton from 'react-loading-skeleton';
 import Image from "next/image";
 import LoginBg from "@/assets/background-image/login-ward.png";
 
+
 const LoginFormWard = dynamic(() => import("./_components/login-form-ward"), { 
-  ssr: false,
+  ssr: true,
   loading: () => <Skeleton height={40} width={147} /> 
 });
 
@@ -26,9 +27,7 @@ export default async function SignInPage() {
             <h1 className="text-2xl font-semibold">CAREMINDER</h1>
             <p className="text-primary mt-2">케어플로우에 오신걸 환영합니다.</p>
           </div>
-          <LoginFormWard />
-          
-
+          <LoginFormWard />          
           <div className="text-center text-sm text-gray-500 space-x-2">
             <span>ID/PW 찾기</span>
             <span>|</span>
