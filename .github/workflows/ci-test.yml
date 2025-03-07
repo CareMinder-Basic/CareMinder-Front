@@ -27,5 +27,10 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Start server
+        run: pnpm run start &
+        env:
+          NODE_ENV: production
+
       - name: Run tests
         run: pnpm test
