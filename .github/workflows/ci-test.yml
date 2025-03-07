@@ -27,8 +27,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Start server
-        run: pnpm run start &
+      - name: Start CareFlow server
+        run: pnpm run dev:careflow &
         env:
           NODE_ENV: production
 
