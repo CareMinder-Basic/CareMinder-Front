@@ -1,7 +1,11 @@
-const baseConfig = require('../../jest.config');
-
 module.exports = {
-  ...baseConfig,
-  displayName: 'frontend',
-  testMatch: ['**/__tests__/**/*.test.ts?(x)'],
+  preset: 'ts-jest',
+  testEnvironment: 'node',
+  moduleNameMapper: {
+    '^@/(.*)$': '<rootDir>/src/$1',
+  },
+  roots: ['<rootDir>/src'],
+  transform: {
+    '^.+\\.(ts|tsx)$': 'ts-jest',
+  },
 };

@@ -7,3 +7,5 @@
  */
 
 export { default as Modal } from './modal';
+export { default as LoginForm } from './login-form';
+export { default as LoadingSpinner } from './loading-spinner';
