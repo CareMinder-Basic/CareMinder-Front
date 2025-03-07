@@ -11,4 +11,7 @@ export default defineConfig({
     baseUrl: 'http://localhost:5173',
     supportFile: false,
   },
+  env: {
+    serverUrl: 'https://dev.careflow.co.kr/api',
+  },
 });

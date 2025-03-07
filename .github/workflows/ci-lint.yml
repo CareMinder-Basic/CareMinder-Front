@@ -1,4 +1,4 @@
-name: CI
+name: LINT
 
 on:
   push:
@@ -29,6 +29,3 @@ jobs:
 
       - name: Run lint
         run: pnpm run lint
-
-      - name: Run tests
-        run: pnpm test
