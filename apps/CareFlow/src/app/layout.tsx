@@ -23,7 +23,7 @@ export default function RootLayout({
   children: React.ReactNode;
   modal: React.ReactNode;
 }) {
-  const testScript ="test"
+  
   return (
     <html lang="ko">
       <body className={pretendard.className}>
