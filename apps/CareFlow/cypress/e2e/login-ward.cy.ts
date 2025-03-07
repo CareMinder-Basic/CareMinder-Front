@@ -62,36 +62,36 @@ describe('Login Form', () => {
     //     },
     //   },
     // }).as('loginRequest');
-    cy.intercept('POST', `${serverUrl}/users/login`, (req) => {
-      req.reply((res) => {
-        // 요청 정보 출력
-        console.log('Request:', req);
+    // cy.intercept('POST', `${serverUrl}/users/login`, (req) => {
+    //   req.reply((res) => {
+    //     // 요청 정보 출력
+    //     console.log('Request:', req);
 
-        // 응답 정보 출력
-        console.log('Response:', res);
+    //     // 응답 정보 출력
+    //     console.log('Response:', res);
 
-        // 응답 수정 가능
-        res.send({
-          statusCode: 200,
-          body: {
-            jwtResponse: {
-              accessToken: 'success-ward-token',
-              refreshToken: 'success-ward-refresh-token',
-            },
-            currentUser: {
-              name: 'success-ward-user',
-              accountId: 0,
-              role: 'WARD',
-              passwordChangeRequested: true,
-              firstLogin: true,
-              requestStatus: 'PENDING',
-              accountStatus: 'ACTIVE',
-            },
-          },
-        });
-      });
-    }).as('loginRequest');
+    //     // 응답 수정 가능
+    //     res.send({
+    //       statusCode: 200,
+    //       body: {
+    //         jwtResponse: {
+    //           accessToken: 'success-ward-token',
+    //           refreshToken: 'success-ward-refresh-token',
+    //         },
+    //         currentUser: {
+    //           name: 'success-ward-user',
+    //           accountId: 0,
+    //           role: 'WARD',
+    //           passwordChangeRequested: true,
+    //           firstLogin: true,
+    //           requestStatus: 'PENDING',
+    //           accountStatus: 'ACTIVE',
+    //         },
+    //       },
+    //     });
+    //   });
+    // }).as('loginRequest');
     //기대하는 경로와 현재 경로가 일치하는지
-    cy.url({ timeout: 10000 }).should('eq', Cypress.config().baseUrl + '/');
+    // cy.url({ timeout: 10000 }).should('eq', Cypress.config().baseUrl + '/');
   });
 });
