@@ -14,3 +14,8 @@
 - pnpm dev:careflow : careflow 프로젝트 실행
 - pnpm dev:@cds : ui-library storybook 실행
 - pnpm build:@cds: ui-library 빌드
+
+
+# flow
+
+- Trunk-Based Development
