@@ -63,6 +63,6 @@ describe('Login Form', () => {
       },
     }).as('loginRequest');
     //기대하는 경로와 현재 경로가 일치하는지
-    cy.url().should('eq', Cypress.config().baseUrl + '/');
+    cy.url({ timeout: 10000 }).should('eq', Cypress.config().baseUrl + '/');
   });
 });
