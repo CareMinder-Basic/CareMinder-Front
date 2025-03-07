@@ -59,7 +59,6 @@
   },
   "scripts": {
     "build": "tsup --config tsup.config.ts",
-    "test": "jest",
     "storybook-generate": "sb-rn-get-stories",
     "storybook": "npx storybook dev -p 6006",
     "build-storybook": "storybook build"

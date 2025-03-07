@@ -18,7 +18,19 @@
       "cache": false,
       "outputs": []
     },
-    "unit":{
+    "unit": {
+      "dependsOn": [],
+      "outputs": []
+    },
+    "lint": {
+      "dependsOn": [],
+      "outputs": []
+    },
+    "format": {
+      "dependsOn": [],
+      "outputs": []
+    },
+    "test": {
       "dependsOn": [],
       "outputs": []
     }

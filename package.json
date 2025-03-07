@@ -9,7 +9,10 @@
     "dev:careflow": "turbo run dev --filter=careflow...",
     "dev:@cds": "turbo run storybook --filter=@careminder/cds",
     "build:@cds": "turbo run build --filter=@careminder/cds",
-    "build:@config": "turbo run build --filter=@careminder/config"
+    "build:@config": "turbo run build --filter=@careminder/config",
+    "test": "turbo run test",
+    "test:careflow": "turbo run test --filter=careflow...",
+    "lint": "turbo run lint"
   },
   "devDependencies": {
     "@types/jest": "^29.5.12",
