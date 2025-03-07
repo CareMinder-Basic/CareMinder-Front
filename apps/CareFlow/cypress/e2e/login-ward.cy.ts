@@ -38,11 +38,13 @@ describe('Login Form', () => {
     //에러 처리 들어갈 곳
   });
 
+  const serverUrl = Cypress.env('serverUrl');
+
   it('로그인 성공', () => {
     cy.get('[data-cy=login-id]').type('ward');
     cy.get('[data-cy=password]').type('1234');
     cy.get('[data-cy=submit-button]').click();
-    cy.intercept('POST', '/api/user/login', {
+    cy.intercept('POST', `${serverUrl}/users/login`, {
       statusCode: 200,
       body: {
         jwtResponse: {
@@ -61,8 +63,6 @@ describe('Login Form', () => {
       },
     }).as('loginRequest');
     //기대하는 경로와 현재 경로가 일치하는지
-    cy.wait(1000);
-
     cy.url().should('eq', Cypress.config().baseUrl + '/');
   });
 });
