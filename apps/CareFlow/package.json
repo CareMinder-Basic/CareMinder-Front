@@ -8,9 +8,9 @@
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --write .",
-    "e2e:open": "cypress open",
-    "e2e:run": "cypress run",
-    "test": "next dev -p 5173 & cypress run"
+    "e2e:open": "next dev -p 5173 & cypress open",
+    "e2e:run": "next dev -p 5173 & cypress run --browser chrome",
+    "test": "next dev -p 5173 & cypress run --browser chrome"
   },
   "dependencies": {
     "@careminder/cds": "workspace:*",
