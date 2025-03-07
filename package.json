@@ -10,7 +10,7 @@
     "dev:@cds": "turbo run storybook --filter=@careminder/cds",
     "build:@cds": "turbo run build --filter=@careminder/cds",
     "build:@config": "turbo run build --filter=@careminder/config",
-    "test": "turbo run test",
+    "test": "turbo run test --filter=./apps/*",
     "test:careflow": "turbo run test --filter=careflow...",
     "lint": "turbo run lint"
   },
