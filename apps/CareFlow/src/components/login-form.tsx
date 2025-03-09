@@ -5,7 +5,7 @@ import { LoginFormType } from "@/lib";
 import { useDelayedSkeleton } from "@/hooks/useDelayedSkeleton";
 
 export default function LoginForm({
-  onSubmit,
+  onSubmit,  
   handleSubmit,
   register,
   errors,

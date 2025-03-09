@@ -1,19 +1,51 @@
-import { FC, PropsWithChildren } from 'react';
-import { ButtonProps } from '@mui/material';
 import * as react_jsx_runtime from 'react/jsx-runtime';
+import * as class_variance_authority_dist_types from 'class-variance-authority/dist/types';
+import * as React from 'react';
+import { VariantProps } from 'class-variance-authority';
+import { UseFormHandleSubmit, UseFormRegister, FieldErrors } from 'react-hook-form';
 
-type CustomButtonProps = {
-    buttontype: "primary" | "primarySpaure" | "primarySpaureWhite" | "gradient" | "primaryWhite" | "primaryBlack" | "primarySpaureLong" | "impactRed" | "primarySecond";
-    icon?: React.ReactNode;
-    width: string | number;
-    height: string | number;
-    fontSize: string | number;
-    borderRadius: string | number;
-    fontWeight?: string | number;
-    lineHeight?: string | number;
-} & ButtonProps;
-declare const CDSButton: FC<CustomButtonProps>;
+declare const buttonVariants: (props?: ({
+    variant?: "default" | "destructive" | "outline" | "secondary" | "ghost" | "gradient" | "link" | null | undefined;
+    radius?: "none" | "sm" | "md" | "lg" | "xl" | "full" | null | undefined;
+    textSize?: "sm" | "lg" | "xl" | "xs" | "base" | "2xl" | "3xl" | null | undefined;
+    fontWeight?: "thin" | "light" | "normal" | "medium" | "semibold" | "bold" | "extrabold" | null | undefined;
+} & class_variance_authority_dist_types.ClassProp) | undefined) => string;
+type ButtonProps = React.ComponentProps<"button"> & VariantProps<typeof buttonVariants> & {
+    asChild?: boolean;
+    width: string;
+    height: string;
+    color?: string;
+};
+declare const Button: ({ className, variant, radius, textSize, color, fontWeight, width, height, asChild, ...props }: ButtonProps) => react_jsx_runtime.JSX.Element;
 
-declare function MuiSetting({ children }: PropsWithChildren): react_jsx_runtime.JSX.Element;
+declare const inputVariants: (props?: ({
+    radius?: "none" | "sm" | "md" | "lg" | "xl" | "full" | null | undefined;
+    textSize?: "sm" | "lg" | "xl" | "xs" | "base" | "2xl" | "3xl" | null | undefined;
+    fontWeight?: "thin" | "light" | "normal" | "medium" | "semibold" | "bold" | "extrabold" | null | undefined;
+} & class_variance_authority_dist_types.ClassProp) | undefined) => string;
+interface InputProps extends React.ComponentProps<"input">, VariantProps<typeof inputVariants> {
+    width: string;
+    height: string;
+    className?: string;
+    leftIcon?: React.ReactNode;
+    rightIcon?: React.ReactNode;
+    paddingLeft?: string;
+    paddingRight?: string;
+}
+declare const Input: React.ForwardRefExoticComponent<Omit<InputProps, "ref"> & React.RefAttributes<HTMLInputElement>>;
 
-export { CDSButton as Button, type CustomButtonProps, MuiSetting as ThemeProvider };
+interface LoginFormData {
+    loginId: string;
+    password: string;
+}
+interface LoginFormProps {
+    onSubmit: (data: LoginFormData) => void;
+    handleSubmit: UseFormHandleSubmit<LoginFormData>;
+    register: UseFormRegister<LoginFormData>;
+    errors?: FieldErrors<LoginFormData>;
+    isDisabled: boolean;
+    onError: (error: any) => void;
+}
+declare function LoginForm({ onSubmit, handleSubmit, register, onError, isDisabled }: LoginFormProps): react_jsx_runtime.JSX.Element;
+
+export { Button, type ButtonProps, Input, type InputProps, LoginForm };

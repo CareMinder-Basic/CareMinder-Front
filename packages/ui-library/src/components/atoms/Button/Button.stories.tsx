@@ -1,156 +1,250 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import CDSButton from "./Button";
+import type { Meta, StoryObj } from '@storybook/react';
+import React from 'react';
+import { Button } from './Button';
 
 const meta = {
-  title: "Components/Button",
-  component: CDSButton,
+  title: 'Atoms/Button',
+  component: Button,
   parameters: {
-    layout: "centered",
+    layout: 'centered',
   },
   argTypes: {
-    width: { control: "text" },
-    height: { control: "text" },
-    fontSize: { control: "text" },
-    borderRadius: { control: "text" },
-    fontWeight: { control: "text" },
-    lineHeight: { control: "text" },
+    variant: {
+      control: 'select',
+      options: ['default', 'destructive', 'outline', 'secondary', 'ghost', 'link', 'gradient'],
+    },    
+    color: {
+      control: 'color',
+    },
+    radius: {
+      control: 'select',
+      options: ['none', 'sm', 'md', 'lg', 'xl', 'full'],
+    },
+    textSize: {
+      control: 'select',
+      options: [
+        'h1',
+        'h2',
+        'h3',
+        'h4',
+        'h5',
+        'body1',
+        'body2',
+        'title',
+        'subtitle1',
+        'subtitle2',
+        'caption',
+        'overline'
+      ],
+    },
+    width: {
+      control: 'text',
+    },
+    height: {
+      control: 'text',
+    },
+    disabled: {
+      control: 'boolean',
+    },
+    asChild: {
+      control: 'boolean',
+    },
+    fontWeight: {
+      control: 'select',
+      options: ['thin', 'light', 'normal', 'medium', 'semibold', 'bold', 'extrabold'],
+    },
   },
-  tags: ["autodocs"],
-} satisfies Meta<typeof CDSButton>;
+  tags: ['autodocs'],
+} satisfies Meta<typeof Button>;
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof Button>;
 
-// Primary 버튼
+// 기본 버튼 스타일들
 export const Primary: Story = {
-  name: "Primary",
   args: {
-    buttontype: "primary",
-    children: "BUTTON",
-    width: "200px",
-    height: "48px",
-    fontSize: "16px",
-    borderRadius: "8px",
+    children: 'Primary Button',
+    variant: 'default',
+    width: '140px',
+    height: '40px',
+    textSize: "base", 
   },
 };
 
-// Primary White 버튼
-export const PrimaryWhite: Story = {
-  name: "Primary White",
-  args: {
-    buttontype: "primaryWhite",
-    children: "BUTTON",
-    width: "200px",
-    height: "48px",
-    fontSize: "16px",
-    borderRadius: "8px",
-  },
-};
-
-// Primary White with Border 버튼
-export const PrimaryWhiteBorder: Story = {
-  name: "Primary White with Border",
-  args: {
-    buttontype: "primarySpaureWhite",
-    children: "BUTTON",
-    width: "200px",
-    height: "48px",
-    fontSize: "16px",
-    borderRadius: "8px",
-  },
-};
-
-// Black Border 버튼
-export const BlackBorder: Story = {
-  name: "Black Border",
-  args: {
-    buttontype: "primaryBlack",
-    children: "BUTTON",
-    width: "200px",
-    height: "48px",
-    fontSize: "16px",
-    borderRadius: "8px",
-  },
-};
-
-// Gradient 버튼
-export const Gradient: Story = {
-  name: "Gradient",
-  args: {
-    buttontype: "gradient",
-    children: "BUTTON",
-    width: "600px",
-    height: "82px",
-    fontSize: "16px",
-    borderRadius: "8px",
-  },
-};
-
-// Impact Red 버튼
-export const ImpactRed: Story = {
-  name: "Impact Red",
-  args: {
-    buttontype: "impactRed",
-    children: "BUTTON",
-    width: "141px",
-    height: "32px",
-    fontSize: "14px",
-    borderRadius: "8px",
-  },
-};
-
-// Secondary 버튼
 export const Secondary: Story = {
-  name: "Secondary",
   args: {
-    buttontype: "primarySecond",
-    children: "BUTTON",
-    width: "148px",
-    height: "36px",
-    fontSize: "16px",
-    borderRadius: "6px",
+    children: 'Secondary Button',
+    variant: 'secondary',
+    width: '140px',
+    height: '40px',
+    textSize: "base", 
   },
 };
 
-// 아이콘이 있는 버튼
+export const Destructive: Story = {
+  args: {
+    children: 'Destructive Button',
+    variant: 'destructive',
+    width: '140px',
+    height: '40px',
+    textSize: "base", 
+  },
+};
+
+export const Outline: Story = {
+  args: {
+    children: 'Outline Button',
+    variant: 'outline',
+    width: '140px',
+    height: '40px',
+    textSize: "base", 
+  },
+};
+
+export const Ghost: Story = {
+  args: {
+    children: 'Ghost Button',
+    variant: 'ghost',
+    width: '140px',
+    height: '40px',
+    textSize: "base", 
+  },
+};
+
+export const Link: Story = {
+  args: {
+    children: 'Link Button',
+    variant: 'link',
+    width: '140px',
+    height: '40px',
+    textSize: "base", 
+  },
+};
+
+// 아이콘 버튼
+export const IconButton: Story = {
+  args: {
+    children: '→',    
+    width: '140px',
+    height: '40px',
+    textSize: "base", 
+  },
+};
+
+// 아이콘과 텍스트가 함께 있는 버튼
 export const WithIcon: Story = {
-  name: "With Icon",
   args: {
-    buttontype: "primary",
-    children: "BUTTON",
-    icon: "→",
-    width: "200px",
-    height: "48px",
-    fontSize: "16px",
-    borderRadius: "8px",
-  },
-};
-
-// 커스텀 사이즈 버튼
-export const CustomSized: Story = {
-  name: "Custom Size",
-  args: {
-    buttontype: "primary",
-    children: "BUTTON",
-    width: "300px",
-    height: "60px",
-    fontSize: "20px",
-    borderRadius: "12px",
-    fontWeight: "500",
-    lineHeight: "28px",
+    width: '140px',
+    height: '40px',
+    textSize: "base", 
+    children: (
+      <>
+        Next
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M5 12h14" />
+          <path d="m12 5 7 7-7 7" />
+        </svg>
+      </>
+    ),
   },
 };
 
 // 비활성화된 버튼
 export const Disabled: Story = {
-  name: "Disabled",
   args: {
-    buttontype: "primary",
-    children: "BUTTON",
-    width: "200px",
-    height: "48px",
-    fontSize: "16px",
-    borderRadius: "8px",
+    children: 'Disabled Button',
     disabled: true,
+    width: '140px',
+    height: '40px',
+    textSize: "base", 
   },
 };
+
+//그라데이션 버튼
+export const Gradient: Story = {  
+  args: {
+    children: 'Gradient Button',
+    variant: 'gradient',
+    width: '140px',
+    height: '40px',
+    textSize: "base", 
+  },
+}
+
+// All variants
+export const AllVariants: Story = {
+  render: () => (
+    <div className="flex flex-col gap-4">
+      <div className="flex gap-4">
+        <Button width={'100px'} height={'40px'}>Default</Button>
+        <Button variant="secondary" width={'100px'} height={'40px'}>Secondary</Button>
+        <Button variant="destructive" width={'100px'} height={'40px'}>Destructive</Button>
+      </div>
+      <div className="flex gap-4">
+        <Button variant="outline" width={'100px'} height={'40px'}>Outline</Button>
+        <Button variant="ghost" width={'100px'} height={'40px'}>Ghost</Button>
+        <Button variant="link" width={'100px'} height={'40px'}>Link</Button>
+      </div>
+      <div className="flex gap-4">
+        <Button variant="gradient" width={'100px'} height={'40px'}>Gradient</Button>
+      </div>
+    </div>
+  ),
+};
+
+// All radius variants
+export const AllRadiusVariants: Story = {
+  render: () => (
+    <div className="flex gap-4">
+      <Button radius="none" width="100px" height="40px">None</Button>
+      <Button radius="sm" width="100px" height="40px">Small</Button>
+      <Button radius="md" width="100px" height="40px">Medium</Button>
+      <Button radius="lg" width="100px" height="40px">Large</Button>
+      <Button radius="xl" width="100px" height="40px">XLarge</Button>
+      <Button radius="full" width="100px" height="40px">Full</Button>
+    </div>
+  ),
+};
+
+// All text sizes
+export const AllTextSizes: Story = {
+  render: () => (
+    <div className="flex flex-col gap-4">
+      <Button textSize="xs" width="200px" height="40px">H1 Text (12px)</Button>
+      <Button textSize="sm" width="200px" height="40px">H2 Text (14px)</Button>
+      <Button textSize="base" width="200px" height="40px">H3 Text (16px)</Button>
+      <Button textSize="lg" width="200px" height="40px">H4 Text (18px)</Button>
+      <Button textSize="xl" width="200px" height="40px">H5 Text (20px)</Button>
+      <Button textSize="2xl" width="200px" height="40px">Body1 Text (24px)</Button>
+      <Button textSize="3xl" width="200px" height="40px">Body2 Text (30px)</Button>      
+    </div>
+  ),
+};
+
+// All font weights
+export const AllFontWeights: Story = {
+  render: () => (
+    <div className="flex flex-col gap-4">
+      <Button fontWeight="thin" width="200px" height="40px">Thin Text</Button>
+      <Button fontWeight="light" width="200px" height="40px">Light Text</Button>
+      <Button fontWeight="normal" width="200px" height="40px">Normal Text</Button>
+      <Button fontWeight="medium" width="200px" height="40px">Medium Text</Button>
+      <Button fontWeight="semibold" width="200px" height="40px">Semibold Text</Button>
+      <Button fontWeight="bold" width="200px" height="40px">Bold Text</Button>
+      <Button fontWeight="extrabold" width="200px" height="40px">Extra Bold Text</Button>
+    </div>
+  ),
+};
+
+
+
