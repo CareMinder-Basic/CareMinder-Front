@@ -14,7 +14,7 @@ interface LoginFormProps {
   register: UseFormRegister<LoginFormData>;
   errors?: FieldErrors<LoginFormData>;
   isDisabled: boolean;
-  dataCy: {
+  dataCy?: {
     loginId: string;
     password: string;
     submitButton: string;
@@ -22,7 +22,7 @@ interface LoginFormProps {
   onError: (error: any) => void;
 }
 
-export function LoginForm({ onSubmit, handleSubmit, register, onError, isDisabled, dataCy }: LoginFormProps) {  
+export function LoginForm({ onSubmit, handleSubmit, register, onError, isDisabled, dataCy={loginId: 'login-id', password: 'password', submitButton: 'submit-button'} }: LoginFormProps) {  
 
   return (
     <form onSubmit={handleSubmit(onSubmit, onError)} className="flex flex-col gap-12">

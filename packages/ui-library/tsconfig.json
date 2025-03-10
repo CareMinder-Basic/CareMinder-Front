@@ -21,7 +21,8 @@
     "paths": {
       "@/*": ["./src/*"],
       "@ui-library/*": ["../../packages/ui-library/src/*"],
-      "react-native": ["node_modules/react-native-web"]
+      "react-native": ["node_modules/react-native-web"],
+      "@careminder/fonts/*": ["../fonts/*"]
     }
   },
   "include": ["src", "tests", ".storybook/**/*"],

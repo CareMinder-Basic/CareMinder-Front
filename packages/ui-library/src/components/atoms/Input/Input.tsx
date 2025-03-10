@@ -32,11 +32,17 @@ const inputVariants = cva(
         bold: "font-bold",        // 700
         extrabold: "font-extrabold", // 800
       },
+      status: {
+        default: "focus-visible:ring-input-default",
+        error: "border-input-error text-white focus-visible:ring-input-error",
+        success: "border-input-success text-white focus-visible:ring-input-success",               
+      }
     },
     defaultVariants: {
       radius: "md",
       textSize: "base",
       fontWeight: "normal",
+      status: "default"
     },
   }
 )
@@ -46,17 +52,20 @@ interface InputProps extends React.ComponentProps<"input">, VariantProps<typeof 
   height: string;
   className?: string;
   leftIcon?: React.ReactNode;
+  leftIconPosition?: number
   rightIcon?: React.ReactNode;
+  rightIconPosition?: number
   paddingLeft?: string;
   paddingRight?: string;
+  status?: "default" | "error" | "success";
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, type, width, height, placeholder, leftIcon, rightIcon, radius, textSize, fontWeight, paddingLeft = "pl-12", paddingRight = "pr-12", ...props }, ref) => {
+  ({ className, type, width, status, height, placeholder, leftIcon, leftIconPosition = 5, rightIcon, rightIconPosition = 5, radius, textSize, fontWeight, paddingLeft = "pl-12", paddingRight = "pr-12", ...props }, ref) => {
     return (
       <div className="relative inline-flex items-center w-full">
         {leftIcon && (
-          <div className="absolute left-5 flex items-center pointer-events-none text-text-DEFAULT">
+          <div className={`absolute flex items-center pointer-events-none text-text-DEFAULT`} style={{ left: `${leftIconPosition}px` }}>
             {leftIcon}
           </div>
         )}
@@ -64,17 +73,17 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           type={type}
           placeholder={placeholder}
           className={cn(
-            inputVariants({ radius, textSize, fontWeight }),
+            inputVariants({ radius, textSize, fontWeight, status }),
             leftIcon && paddingLeft,
             rightIcon && paddingRight,
             className,
           )}
           style={{ width: width, height: height }}
-          ref={ref}
+          ref={ref}          
           {...props}
         />
         {rightIcon && (
-          <div className="absolute right-5 flex items-center text-text-DEFAULT">
+          <div className={`absolute flex items-center text-text-DEFAULT`} style={{ right: `${rightIconPosition}px` }}>
             {rightIcon}
           </div>
         )}

@@ -12,31 +12,53 @@ const meta = {
   argTypes: {
     disabled: {
       control: 'boolean',
+      description: '입력 필드가 비활성화되었는지 여부를 나타냅니다',      
     },
     placeholder: {
       control: 'text',
+      description: '입력 필드의 플레이스홀더 텍스트를 나타냅니다',
     },
     type: {
       control: 'select',
       options: ['text', 'password', 'email', 'number', 'search', 'tel', 'url'],
+      description: '입력 필드의 타입을 나타냅니다',
+    },
+    leftIconPosition: {
+      control: 'number',
+      description: '왼쪽 아이콘의 위치를 나타냅니다',
+      
+    },
+    rightIconPosition: {
+      control: 'number',
+      description: '오른쪽 아이콘의 위치를 나타냅니다',
+      defaultValue: 5,
     },
     width: {
       control: 'text',
-    },
+    },    
     height: {
       control: 'text',
+      description: '입력 필드의 높이를 나타냅니다',
     },
     radius: {
       control: 'select',
       options: ['none', 'sm', 'md', 'lg', 'xl', 'full'],
+      description: '입력 필드의 모서리 반경을 나타냅니다',
     },
     textSize: {
       control: 'select',
       options: ['xs', 'sm', 'base', 'lg', 'xl', '2xl', '3xl'],
+      description: '입력 필드의 텍스트 크기를 나타냅니다',
     },
     fontWeight: {
       control: 'select',
       options: ['thin', 'light', 'normal', 'medium', 'semibold', 'bold', 'extrabold'],
+      description: '입력 필드의 폰트 두께를 나타냅니다',
+    },
+    status: {
+      control: 'select',
+      options: ['default', 'error', 'success', 'warning'],
+      description: '입력 필드의 상태를 나타냅니다',
     },
   },
 } satisfies Meta<typeof Input>;
@@ -53,15 +75,7 @@ export const Default: Story = {
   },
 };
 
-// 비활성화된 입력 필드
-export const Disabled: Story = {
-  args: {
-    placeholder: '비활성화된 입력 필드',
-    disabled: true,
-    width: '300px',
-    height: '40px',
-  },
-};
+
 
 // 이메일 입력 필드
 export const Email: Story = {
@@ -89,33 +103,8 @@ export const Search: Story = {
     type: 'search',
     placeholder: '검색어를 입력해주세요',
     width: '300px',
-    height: '40px',
+    height: '40px',          
   },
-};
-
-// 에러 상태의 입력 필드
-export const WithError: Story = {
-  args: {
-    placeholder: '에러 상태',
-    className: 'border-destructive',
-    'aria-invalid': true,
-    width: '300px',
-    height: '40px',
-  },
-};
-
-// 다양한 입력 필드 모음
-export const AllVariants: Story = {
-  render: () => (
-    <div className="flex flex-col space-y-4 w-[300px]">
-      <Input placeholder="기본 입력 필드" width={''} height={''} />
-      <Input placeholder="비활성화된 입력 필드" disabled width={''} height={''} />
-      <Input type="email" placeholder="이메일 입력" width={''} height={''} />
-      <Input type="password" placeholder="비밀번호 입력" width={''} height={''} />
-      <Input type="search" placeholder="검색어 입력" width={''} height={''} />
-      <Input placeholder="에러 상태" className="border-destructive" aria-invalid width={''} height={''} />
-    </div>
-  ),
 };
 
 // 라벨과 함께 사용하는 예시
@@ -189,6 +178,7 @@ export const WithLeftIcon: Story = {
   args: {
     placeholder: '검색어를 입력하세요',
     leftIcon: <SearchIcon />,
+    leftIconPosition: 5,
   },
 };
 
@@ -249,35 +239,6 @@ export const AllRadiusVariants: Story = {
   ),
 };
 
-// 아이콘과 radius 조합
-export const IconWithRadius: Story = {
-  render: () => (
-    <div className="flex flex-col space-y-4 w-[300px]">
-      <Input
-        radius="full"
-        placeholder="Search with rounded corners"
-        leftIcon={<SearchIcon />}
-        width="300px"
-        height="40px"
-      />
-      <Input
-        radius="lg"
-        placeholder="Email with large radius"
-        leftIcon={<EmailIcon />}
-        width="300px"
-        height="40px"
-      />
-      <Input
-        radius="none"
-        placeholder="Password with no radius"
-        leftIcon={<LockIcon />}
-        width="300px"
-        height="40px"
-      />
-    </div>
-  ),
-};
-
 // 모든 텍스트 크기 변형 보여주기
 export const AllTextSizes: Story = {
   render: () => (
@@ -293,46 +254,36 @@ export const AllTextSizes: Story = {
   ),
 };
 
-// 모든 폰트 두께 변형 보여주기
-export const AllFontWeights: Story = {
+export const StatusVariants: Story = {
   render: () => (
     <div className="flex flex-col space-y-4 w-[300px]">
-      <Input fontWeight="thin" placeholder="Thin Font Weight" width="300px" height="40px" />
-      <Input fontWeight="light" placeholder="Light Font Weight" width="300px" height="40px" />
-      <Input fontWeight="normal" placeholder="Normal Font Weight" width="300px" height="40px" />
-      <Input fontWeight="medium" placeholder="Medium Font Weight" width="300px" height="40px" />
-      <Input fontWeight="semibold" placeholder="Semibold Font Weight" width="300px" height="40px" />
-      <Input fontWeight="bold" placeholder="Bold Font Weight" width="300px" height="40px" />
-      <Input fontWeight="extrabold" placeholder="Extra Bold Font Weight" width="300px" height="40px" />
+      <Input 
+        status="default"
+        placeholder="기본 상태"
+        width="300px"
+        height="40px"
+      />
+      <Input 
+        status="error"
+        placeholder="에러 상태"
+        width="300px"
+        height="40px"
+      />
+      <Input 
+        status="success"
+        placeholder="성공 상태"
+        width="300px"
+        height="40px"
+      />  
+      <Input 
+        status="default"
+        disabled={true}
+        placeholder="비활성화 상태"
+        width="300px"
+        height="40px"
+      />      
     </div>
   ),
 };
 
-// 텍스트 크기와 폰트 두께 조합
-export const TextSizeWithFontWeight: Story = {
-  render: () => (
-    <div className="flex flex-col space-y-4 w-[300px]">
-      <Input 
-        textSize="2xl" 
-        fontWeight="bold" 
-        placeholder="2XL Bold" 
-        width="300px" 
-        height="40px" 
-      />
-      <Input 
-        textSize="base" 
-        fontWeight="medium" 
-        placeholder="Base Medium" 
-        width="300px" 
-        height="40px" 
-      />
-      <Input 
-        textSize="xs" 
-        fontWeight="light" 
-        placeholder="XS Light" 
-        width="300px" 
-        height="40px" 
-      />
-    </div>
-  ),
-};
+

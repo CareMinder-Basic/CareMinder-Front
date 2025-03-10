@@ -9,4 +9,9 @@ module.exports = {
     './.storybook/**/*.{js,ts,jsx,tsx}',
     '../../packages/ui-library/components/**/*.{ts,tsx}',
   ],
+  safelist: [
+    {
+      pattern: /^text-\[.*\]$/, // text-[*] 패턴의 모든 클래스를 포함
+    },
+  ],
 };
