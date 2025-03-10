@@ -9,13 +9,19 @@ export default function LoginForm({
   handleSubmit,
   register,
   errors,
-  onError
+  onError,
+  dataCy
 }: {
   onSubmit: (data: LoginFormType) => void;
   handleSubmit: UseFormHandleSubmit<LoginFormType>;
   register: UseFormRegister<LoginFormType>;
   errors?: FieldErrors<LoginFormType>;
   onError: (error: any) => void;
+  dataCy : {
+    loginId: string;
+    password: string;
+    submitButton: string;
+  }
 }) {        
     return (
       <form onSubmit={handleSubmit(onSubmit,onError)} className="space-y-4">
@@ -24,7 +30,7 @@ export default function LoginForm({
             {...register("loginId")}
             type="text"
             placeholder="아이디"
-            data-cy="login-id"
+            data-cy={dataCy.loginId}
             className="w-full p-2 border rounded"
           />
           {errors?.loginId && (
@@ -37,7 +43,7 @@ export default function LoginForm({
             {...register("password")}
             type="password"
             placeholder="비밀번호"
-            data-cy="password"
+            data-cy={dataCy.password}
             className="w-full p-2 border rounded"
           />
           {errors?.password && (
@@ -47,7 +53,7 @@ export default function LoginForm({
   
         <button
           type="submit"
-          data-cy="submit-button"
+          data-cy={dataCy.submitButton}
           className="w-full bg-blue-500 text-white p-2 rounded"
         >
           로그인

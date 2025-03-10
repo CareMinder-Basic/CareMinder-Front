@@ -44,8 +44,13 @@ interface LoginFormProps {
     register: UseFormRegister<LoginFormData>;
     errors?: FieldErrors<LoginFormData>;
     isDisabled: boolean;
+    dataCy: {
+        loginId: string;
+        password: string;
+        submitButton: string;
+    };
     onError: (error: any) => void;
 }
-declare function LoginForm({ onSubmit, handleSubmit, register, onError, isDisabled }: LoginFormProps): react_jsx_runtime.JSX.Element;
+declare function LoginForm({ onSubmit, handleSubmit, register, onError, isDisabled, dataCy }: LoginFormProps): react_jsx_runtime.JSX.Element;
 
 export { Button, type ButtonProps, Input, type InputProps, LoginForm };
