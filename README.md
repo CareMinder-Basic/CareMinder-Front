@@ -7,6 +7,8 @@
 - react(19.0.0)
 - nextJs(14.1.0)
 - storybook(7.6.20)
+- Ui: shadcn,tailwindcss
+- Test: cypress,jest
 
 # root scripts
 
