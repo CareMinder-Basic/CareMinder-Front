@@ -349,7 +349,7 @@ var PersonIcon = function(_param) {
 // src/components/molecules/LoginForm/LoginForm.tsx
 import { jsx as jsx4, jsxs as jsxs3 } from "react/jsx-runtime";
 function LoginForm(param) {
-    var onSubmit = param.onSubmit, handleSubmit = param.handleSubmit, register = param.register, onError = param.onError, isDisabled = param.isDisabled;
+    var onSubmit = param.onSubmit, handleSubmit = param.handleSubmit, register = param.register, onError = param.onError, isDisabled = param.isDisabled, dataCy = param.dataCy;
     return /* @__PURE__ */ jsxs3("form", {
         onSubmit: handleSubmit(onSubmit, onError),
         className: "flex flex-col gap-12",
@@ -364,7 +364,7 @@ function LoginForm(param) {
                             width: "428.7px",
                             height: "62.46px",
                             textSize: "2xl",
-                            "data-cy": "login-id",
+                            "data-cy": dataCy.loginId,
                             radius: "xl",
                             leftIcon: /* @__PURE__ */ jsx4(PersonIcon, {}),
                             paddingLeft: "pl-14"
@@ -376,7 +376,7 @@ function LoginForm(param) {
                             placeholder: "PW",
                             width: "428.7px",
                             height: "62.46px",
-                            "data-cy": "password",
+                            "data-cy": dataCy.password,
                             textSize: "2xl",
                             radius: "xl",
                             leftIcon: /* @__PURE__ */ jsx4(LockIcon, {}),
@@ -392,7 +392,7 @@ function LoginForm(param) {
                     variant: "gradient",
                     textSize: "3xl",
                     width: "329.33px",
-                    "data-cy": "submit-button",
+                    "data-cy": dataCy.submitButton,
                     height: "70.98px",
                     radius: "full",
                     disabled: !isDisabled,
