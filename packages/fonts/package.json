@@ -1,0 +1,23 @@
+{
+  "name": "@careminder/fonts",
+  "version": "1.0.0",
+  "private": true,
+  "exports": {
+    ".": {
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.mjs"
+    }
+  },
+  "scripts": {
+    "build": "rollup -c"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "rollup": "^4.35.0",
+    "@rollup/plugin-node-resolve": "^15.0.0",
+    "@rollup/plugin-commonjs": "^24.0.0",
+    "rollup-plugin-postcss": "^4.0.0"
+  }
+}

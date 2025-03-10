@@ -1,6 +1,7 @@
 import type { Preview } from "@storybook/react";
-import { ThemeProvider } from "../src/mui";
 import React from "react";
+import '@careminder/fonts/dist/index.css'; 
+
 
 const preview: Preview = {
   parameters: {
@@ -14,9 +15,9 @@ const preview: Preview = {
 
   decorators: [
     (Story) => (
-      <ThemeProvider>
+      
         <Story />
-      </ThemeProvider>
+      
     ),
   ],
 };

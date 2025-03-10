@@ -10,8 +10,8 @@
     "cssVariables": true
   },
   "aliases": {
-    "components": "@/components",
-    "utils": "@/lib/util"
+    "components": "packages/ui-library/src/components",
+    "utils": "packages/ui-library/src/lib/util"
   },
   "iconLibrary": "lucide"
 }
