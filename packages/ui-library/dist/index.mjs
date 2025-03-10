@@ -149,7 +149,7 @@ var buttonVariants = cva("pointer:cursor-pointer inline-flex items-center justif
     }
 });
 var Button = function(_param) {
-    var className = _param.className, variant = _param.variant, radius = _param.radius, textSize = _param.textSize, _param_color = _param.color, color = _param_color === void 0 ? "#ffffff" : _param_color, fontWeight = _param.fontWeight, width = _param.width, height = _param.height, _param_asChild = _param.asChild, asChild = _param_asChild === void 0 ? false : _param_asChild, props = _object_without_properties(_param, [
+    var className = _param.className, variant = _param.variant, radius = _param.radius, textSize = _param.textSize, _param_color = _param.color, color = _param_color === void 0 ? "#ffffff" : _param_color, fontWeight = _param.fontWeight, width = _param.width, height = _param.height, _param_asChild = _param.asChild, asChild = _param_asChild === void 0 ? false : _param_asChild, children = _param.children, props = _object_without_properties(_param, [
         "className",
         "variant",
         "radius",
@@ -158,10 +158,11 @@ var Button = function(_param) {
         "fontWeight",
         "width",
         "height",
-        "asChild"
+        "asChild",
+        "children"
     ]);
     var Comp = asChild ? Slot : "button";
-    return /* @__PURE__ */ jsx(Comp, _object_spread({
+    return /* @__PURE__ */ jsx(Comp, _object_spread_props(_object_spread({
         "data-slot": "button",
         className: cn(buttonVariants({
             variant: variant,
@@ -175,7 +176,9 @@ var Button = function(_param) {
             height: height,
             color: color
         }
-    }, props));
+    }, props), {
+        children: children
+    }));
 };
 // src/components/atoms/Input/Input.tsx
 import * as React from "react";
@@ -220,23 +223,32 @@ var inputVariants = cva2("flex w-full border border-border-DEFAULT bg-white px-5
             bold: "font-bold",
             // 700
             extrabold: "font-extrabold"
+        },
+        status: {
+            default: "focus-visible:ring-input-default",
+            error: "border-input-error text-white focus-visible:ring-input-error",
+            success: "border-input-success text-white focus-visible:ring-input-success"
         }
     },
     defaultVariants: {
         radius: "md",
         textSize: "base",
-        fontWeight: "normal"
+        fontWeight: "normal",
+        status: "default"
     }
 });
 var Input = React.forwardRef(function(_param, ref) {
-    var className = _param.className, type = _param.type, width = _param.width, height = _param.height, placeholder = _param.placeholder, leftIcon = _param.leftIcon, rightIcon = _param.rightIcon, radius = _param.radius, textSize = _param.textSize, fontWeight = _param.fontWeight, _param_paddingLeft = _param.paddingLeft, paddingLeft = _param_paddingLeft === void 0 ? "pl-12" : _param_paddingLeft, _param_paddingRight = _param.paddingRight, paddingRight = _param_paddingRight === void 0 ? "pr-12" : _param_paddingRight, props = _object_without_properties(_param, [
+    var className = _param.className, type = _param.type, width = _param.width, status = _param.status, height = _param.height, placeholder = _param.placeholder, leftIcon = _param.leftIcon, _param_leftIconPosition = _param.leftIconPosition, leftIconPosition = _param_leftIconPosition === void 0 ? 5 : _param_leftIconPosition, rightIcon = _param.rightIcon, _param_rightIconPosition = _param.rightIconPosition, rightIconPosition = _param_rightIconPosition === void 0 ? 5 : _param_rightIconPosition, radius = _param.radius, textSize = _param.textSize, fontWeight = _param.fontWeight, _param_paddingLeft = _param.paddingLeft, paddingLeft = _param_paddingLeft === void 0 ? "pl-12" : _param_paddingLeft, _param_paddingRight = _param.paddingRight, paddingRight = _param_paddingRight === void 0 ? "pr-12" : _param_paddingRight, props = _object_without_properties(_param, [
         "className",
         "type",
         "width",
+        "status",
         "height",
         "placeholder",
         "leftIcon",
+        "leftIconPosition",
         "rightIcon",
+        "rightIconPosition",
         "radius",
         "textSize",
         "fontWeight",
@@ -247,7 +259,10 @@ var Input = React.forwardRef(function(_param, ref) {
         className: "relative inline-flex items-center w-full",
         children: [
             leftIcon && /* @__PURE__ */ jsx2("div", {
-                className: "absolute left-5 flex items-center pointer-events-none text-text-DEFAULT",
+                className: "absolute flex items-center pointer-events-none text-text-DEFAULT",
+                style: {
+                    left: "".concat(leftIconPosition, "px")
+                },
                 children: leftIcon
             }),
             /* @__PURE__ */ jsx2("input", _object_spread({
@@ -256,7 +271,8 @@ var Input = React.forwardRef(function(_param, ref) {
                 className: cn(inputVariants({
                     radius: radius,
                     textSize: textSize,
-                    fontWeight: fontWeight
+                    fontWeight: fontWeight,
+                    status: status
                 }), leftIcon && paddingLeft, rightIcon && paddingRight, className),
                 style: {
                     width: width,
@@ -265,7 +281,10 @@ var Input = React.forwardRef(function(_param, ref) {
                 ref: ref
             }, props)),
             rightIcon && /* @__PURE__ */ jsx2("div", {
-                className: "absolute right-5 flex items-center text-text-DEFAULT",
+                className: "absolute flex items-center text-text-DEFAULT",
+                style: {
+                    right: "".concat(rightIconPosition, "px")
+                },
                 children: rightIcon
             })
         ]
@@ -349,7 +368,11 @@ var PersonIcon = function(_param) {
 // src/components/molecules/LoginForm/LoginForm.tsx
 import { jsx as jsx4, jsxs as jsxs3 } from "react/jsx-runtime";
 function LoginForm(param) {
-    var onSubmit = param.onSubmit, handleSubmit = param.handleSubmit, register = param.register, onError = param.onError, isDisabled = param.isDisabled, dataCy = param.dataCy;
+    var onSubmit = param.onSubmit, handleSubmit = param.handleSubmit, register = param.register, onError = param.onError, isDisabled = param.isDisabled, _param_dataCy = param.dataCy, dataCy = _param_dataCy === void 0 ? {
+        loginId: "login-id",
+        password: "password",
+        submitButton: "submit-button"
+    } : _param_dataCy;
     return /* @__PURE__ */ jsxs3("form", {
         onSubmit: handleSubmit(onSubmit, onError),
         className: "flex flex-col gap-12",
@@ -402,5 +425,5 @@ function LoginForm(param) {
         ]
     });
 }
-export { Button, Input, LoginForm };
+export { Button, Input, LoginForm, buttonVariants };
 //# sourceMappingURL=index.mjs.map

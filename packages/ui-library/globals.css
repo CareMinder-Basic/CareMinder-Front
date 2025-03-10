@@ -1,5 +1,5 @@
 @import 'tailwindcss';
-
+@import '@careminder/fonts/styles.css';
 @plugin 'tailwindcss-animate';
 
 @custom-variant dark (&:is(.dark *));
