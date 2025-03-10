@@ -24,6 +24,12 @@ export default function LoginFormWard() {
   const setUser = useUserStore((state) => state.setUser);
   const isDisabled = Boolean(watch("loginId")?.trim()) && Boolean(watch("password")?.trim());
 
+  const dataCy = {
+    loginId: 'login-id',
+    password: 'password',
+    submitButton: 'submit-button',
+  }
+
   const onError = (error: any) => {    
     throw new Error('로그인 실패');
   };    
@@ -72,6 +78,7 @@ export default function LoginFormWard() {
       register={register}
       onError={onError}
       errors={errors}
+      dataCy={dataCy}
       isDisabled={isDisabled}
     />
   );

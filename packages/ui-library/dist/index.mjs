@@ -364,6 +364,7 @@ function LoginForm(param) {
                             width: "428.7px",
                             height: "62.46px",
                             textSize: "2xl",
+                            "data-cy": "login-id",
                             radius: "xl",
                             leftIcon: /* @__PURE__ */ jsx4(PersonIcon, {}),
                             paddingLeft: "pl-14"
@@ -375,6 +376,7 @@ function LoginForm(param) {
                             placeholder: "PW",
                             width: "428.7px",
                             height: "62.46px",
+                            "data-cy": "password",
                             textSize: "2xl",
                             radius: "xl",
                             leftIcon: /* @__PURE__ */ jsx4(LockIcon, {}),
@@ -390,6 +392,7 @@ function LoginForm(param) {
                     variant: "gradient",
                     textSize: "3xl",
                     width: "329.33px",
+                    "data-cy": "submit-button",
                     height: "70.98px",
                     radius: "full",
                     disabled: !isDisabled,
