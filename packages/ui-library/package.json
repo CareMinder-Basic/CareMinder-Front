@@ -69,9 +69,8 @@
     "webpack-cli": "6.0.1"
   },
   "scripts": {
-    "build": "tsup --config tsup.config.ts",
+    "build": "tsup --config tsup.config.ts && storybook build",
     "storybook-generate": "sb-rn-get-stories",
-    "storybook": "npx storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "storybook": "npx storybook dev -p 6006"
   }
 }

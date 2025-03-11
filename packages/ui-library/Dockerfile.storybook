@@ -24,7 +24,9 @@ RUN pnpm install
 RUN cd packages/ui-library && pnpm build-storybook --quiet
 
 RUN pnpm install
-RUN cd packages/ui-library && pnpm build-storybook
+RUN cd packages/ui-library && pnpm build
+
+
 
 FROM nginx:stable-alpine
 

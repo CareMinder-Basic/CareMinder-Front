@@ -8,6 +8,7 @@
     "dev": "turbo run dev",
     "dev:careflow": "turbo run dev --filter=careflow...",
     "dev:@cds": "turbo run storybook --filter=@careminder/cds",
+    "build:@packages": "turbo run build --filter=./packages/*",
     "build:@cds": "turbo run build --filter=@careminder/cds",
     "build:@config": "turbo run build --filter=@careminder/config",
     "test": "turbo run test --filter=./apps/*",
