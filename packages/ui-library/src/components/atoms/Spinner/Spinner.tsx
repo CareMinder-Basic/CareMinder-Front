@@ -1,6 +1,6 @@
 import * as React from "react";
 import { cn } from "@/lib/util";
-import { Loader2 } from "lucide-react"; // Shadcn에서는 lucide-react를 아이콘 라이브러리로 사용
+import { Loader2 } from "lucide-react";
 
 interface SpinnerProps extends React.HTMLAttributes<HTMLDivElement> {
   size?: "sm" | "md" | "lg";
