@@ -14,6 +14,7 @@ const config: StorybookConfig = {
   docs: {
     autodocs: true,
   },
+  staticDirs: ['../public', '../../fonts/dist'],
   async viteFinal(config) {
     return {
       ...config,
