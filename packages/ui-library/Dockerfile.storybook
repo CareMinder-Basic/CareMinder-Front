@@ -6,27 +6,24 @@ WORKDIR /app
 RUN npm install -g pnpm
 
 # 모노레포 설정 파일 복사
-COPY package.json pnpm-*.yaml tsconfig.base.json ./
+COPY package.json pnpm-*.yaml tsconfig.base.json turbo.json ./
   
 # 전체 packages 디렉토리 복사 (의존성 해결을 위해)
 COPY packages ./packages
 
-
 # ui-library 관련 파일 복사
-COPY packages/ui-library ./packages/ui-library
-COPY packages/ui-library/tsconfig.json ./packages/ui-library/
+# COPY packages/ui-library ./packages/ui-library
+# COPY packages/ui-library/tsconfig.json ./packages/ui-library/
 
 
-COPY packages/ui-library ./packages/ui-library
 
-
-RUN pnpm install
-RUN cd packages/ui-library && pnpm build-storybook --quiet
+# RUN pnpm install
+# RUN pnpm build && cd packages/ui-library --quiet
 
 RUN pnpm install
-RUN cd packages/ui-library && pnpm build
+RUN pnpm build:@packages
 
-
+RUN cd packages/ui-library
 
 FROM nginx:stable-alpine
 
