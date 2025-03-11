@@ -14,9 +14,6 @@ importers:
       '@tanstack/react-query-devtools':
         specifier: ^5.20.1
         version: 5.66.0(@tanstack/react-query@5.66.0(react@18.3.1))(react@18.3.1)
-      cypress:
-        specifier: ^14.1.0
-        version: 14.1.0
       react:
         specifier: ^18.2.0
         version: 18.3.1
@@ -48,6 +45,9 @@ importers:
       babel-jest:
         specifier: ^29.7.0
         version: 29.7.0(@babel/core@7.26.8)
+      cypress:
+        specifier: ^14.1.0
+        version: 14.1.0
       eslint:
         specifier: ^8.55.0
         version: 8.57.1
