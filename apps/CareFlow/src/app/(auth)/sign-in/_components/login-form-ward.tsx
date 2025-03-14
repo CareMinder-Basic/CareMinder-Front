@@ -8,6 +8,7 @@ import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation';
 import LoadingSpinner from '@/components/loading-spinner';
 import { LoginForm } from '@careminder/cds';
+import { isDev } from '@/utils/isDev';
 export default function LoginFormWard() {
   const {
     register,
@@ -34,7 +35,7 @@ export default function LoginFormWard() {
   };    
 
   const onSubmit = async (data: LoginFormType) => {
-    process.env.NODE_ENV === 'development' && console.log('로그인 시도');
+    isDev && console.log('로그인 시도');
     await login(
       {
         ...data,
@@ -55,7 +56,7 @@ export default function LoginFormWard() {
           Cookies.set('refreshTokenWard', userData.jwtResponse.refreshToken);
 
           {/* 페이지 이동 */}
-          process.env.NODE_ENV === 'development' && console.log('로그인 성공');          
+          isDev && console.log('로그인 성공');          
           router.push('/');          
         },
         onError: (error) => {
